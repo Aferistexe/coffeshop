@@ -8,7 +8,7 @@
 
 
 ### Предварительные требования
-- Node.js (версия 14 или выше)
+- Node.js v24.11.0
 - npm или yarn
 
 ### Установка зависимостей
@@ -20,7 +20,7 @@ npm install
 npm start
 
 ### Технологии
-- **Frontend: React 18, Hooks (useState, useEffect)**
+- **Frontend: React 19.2.0, Hooks (useState, useEffect)**
 
 - **Стилизация: CSS3 с Grid и Flexbox**
 
