@@ -1,9 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-
-const catalog =  [
+export const coffemenu =  [
   {
     id: 1,
     name: "Эспрессо",
@@ -53,15 +48,3 @@ const catalog =  [
     image: "/images/cold-brew.jpg"
   }
 ];
-
-
-
-  return (
-    <div className="App">
-        
-
-    </div>
-  );
-}
-
-export default App;

@@ -1,5 +1,11 @@
+*{
+  box-sizing: border-box;
+}
+
+
 .App {
   text-align: center;
+  background-image: url('../src/images/background/background.webp');
 }
 
 .App-logo {
@@ -35,4 +41,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.catalog{
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  background-color: #282c34;
+  gap: 20px;
+  padding: 20px;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+.catalog-item{
+    background-color: white;
+    padding: 16px;
+
 }
