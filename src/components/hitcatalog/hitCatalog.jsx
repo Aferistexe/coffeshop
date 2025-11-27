@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import {chocolatemenu} from '../../data/chocolate'
 import {teamenu} from '../../data/tea'
 import {coffemenu} from '../../data/coffe'
+import { useBasket } from '../basket/BasketContext';
 
 import '../hitcatalog/hitCatalog.css'
 
@@ -9,23 +10,22 @@ import '../hitcatalog/hitCatalog.css'
 
 
 export default function HitCatalog() {
+const {addToBasket} = useBasket()
 const [chocolate, setchocolate] = useState([])
 const [tea,setTea] = useState([])
-const [coffe,setCoffe]= useState([])
+const [coffee,setCoffee]= useState([])
+
 
 useEffect(()=>{
-  setCoffe(coffemenu.slice(0,4))
-},[])
-
-useEffect(()=>{
+  setCoffee(coffemenu.slice(0,4))
   setTea(teamenu.slice(0,4))
-},[])
-
-useEffect(()=>{
   setchocolate(chocolatemenu.slice(0,4))
+  
 },[])
 
-
+  const handleAddToCart = (product) => {
+    addToBasket(product);
+  };
 
 
 
@@ -40,6 +40,7 @@ useEffect(()=>{
                 <img src={p.image} alt="dasd" />
                 <h1>{p.name}</h1>
                 <p>{p.price} Р</p>
+                <button onClick={() =>handleAddToCart(p)}>Купить</button>
               </div>
             )}
             {tea.map(p =>
@@ -47,13 +48,17 @@ useEffect(()=>{
                 <img src={p.image} alt="dasd" />
                 <h1>{p.name}</h1>
                 <p>{p.price} Р</p>
+                <button onClick={() =>handleAddToCart(p)}>Купить</button>
+
               </div>
             )}
-            {coffe.map(p =>
+            {coffee.map(p =>
               <div key={p.id}>
                 <img src={p.image} alt="dasd" />
                 <h1>{p.name}</h1>
                 <p>{p.price} Р</p>
+                <button onClick={() =>handleAddToCart(p)}>Купить</button>
+
               </div>
             )}
           </div>
