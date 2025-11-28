@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     position: sticky;
-    z-index: 99;
+    z-index: 1000;
     top: 0;
     background-color: #5b2f1d;
 
@@ -19,7 +19,13 @@
     align-items: center;
     gap: 30px;
 }
-.header-items_items-nav_button button{
+.modalBtn{
+    z-index: 1001;
+    background-color: #ca9e8d;
+    border-radius: 20px;
+}
+
+.header-items_items-nav_button-btn{
     padding: 10px;
     display: flex;
     align-items: center;
@@ -29,8 +35,9 @@
     color: white;
     font-size: 18px;
     cursor: pointer;
+    z-index: 1000;
 }
-.header-items_items-nav_button button img{
+.header-items_items-nav_button-img{
     width: 42px;
     filter:brightness(1000%);
 }
@@ -132,9 +139,44 @@ text-decoration: none;
 .header-item-logo_logotype{
     width: 150px;
     background: transparent;
-    display: block; /* или inline-block */
-    mix-blend-mode: normal; /* Режим смешивания */
-    /* Если нужно добавить тень для лучшего визуального отделения */
+    display: block; 
+    mix-blend-mode: normal;
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
     
+}
+
+.basket-modal{
+    background-color: rgba(255, 255, 255, 0.945);
+    
+    z-index: 10;
+    height: 100%;
+    min-height: 800px;
+    position: absolute;
+    top: 0;
+    left: 56%;
+    padding-top: 30px;
+    border-radius: 20px;
+}
+.basket-modal-item img{
+    width: 64px;
+}
+.basket-modal-item{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+    
+}
+.basket-modal-item_items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-direction: column;
+}
+.basket-modal-item{
+    border: 1px solid #333;
+    margin: 10px;
+    margin-top: 30px;
 }

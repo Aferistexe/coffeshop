@@ -5,11 +5,36 @@ import candy from '../../images/header/candy.png'
 import stall from '../../images/header/stall.png'
 import search from '../../images/header/search.png';
 import logo from '../../images/header/Kofesko.png';
-import basket from '../../images/header/basket.png'
+import basketimg from '../../images/header/basket.png'
 import { useBasket } from '../basket/BasketContext'
+import { useEffect, useState } from "react";
 
 export default function Header() {
-    const { totalItems, totalPrice } = useBasket()
+    const { setbasket,totalItems, totalPrice, basket,minusBasket,plusBasket} = useBasket()
+    const [openBasket,setOpenBasket] = useState(false)
+    useEffect(()=>{
+
+            if(openBasket && basket.length == 0){
+                setOpenBasket(!openBasket)
+            }
+            
+        
+    },[basket])
+    useEffect(()=>{
+      
+    },[])
+
+
+    const btnOpenModal =()=>{
+        if(basket.length !== 0){
+            setOpenBasket(!openBasket)
+        }else{
+
+            alert("Ваша корзина пуста")
+        }
+
+    }
+
 
     return (
         <header className='header'>
@@ -35,8 +60,8 @@ export default function Header() {
                             <a href="tel:+79037268028">+7 (903) 726-80-28</a>
                             <p>горячая линия</p> 
                         </div>
-                        <div className='header-items_items-nav_button'>
-                            <button><img src={basket} alt="Корзина" /> Товаров: {totalItems} ({totalPrice}р.)</button>
+                        <div className={openBasket?"modalBtn":""}>
+                            <button className="header-items_items-nav_button-btn" onClick={btnOpenModal}><img className="header-items_items-nav_button-img" src={basketimg} alt="Корзина" /> Товаров: {totalItems} ({totalPrice}р.)</button>
                         </div>
                     </div>
                 </div>
@@ -69,6 +94,22 @@ export default function Header() {
                         </ul>
                     </nav>
                 </div>
+            </div>
+            <div className="basket-modal">
+                {openBasket && basket.map((e)=>
+                <div key={e.id} className="basket-modal-item">
+                    <img src={e.image} alt="" />
+                    <h1>{e.name}</h1>
+                    <div className="basket-modal-item_items">
+                        <p>{e.price} руб.</p>
+                        <p>{e.quantity} шт.</p>
+                        <div>
+                            <button onClick={()=> plusBasket(e)}>+</button>
+                            <button onClick={() => minusBasket(e)}>-</button>
+                        </div>
+                    </div>
+                </div>  
+                )}
             </div>
         </header>
     )
