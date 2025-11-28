@@ -71,7 +71,8 @@ const totalPrice = basket.reduce((sum,item)=> sum + (item.quantity * item.price)
         totalItems,
         totalPrice,
         minusBasket,
-        plusBasket
+        plusBasket,
+        setbasket
     }}>
         {children} 
         
