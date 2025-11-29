@@ -15,12 +15,22 @@ setbasket(oldBasket => {
     if (fintOldBasket){
         return oldBasket.map(item => 
             item.id === product.id
-            ? {...item,quantity:item.quantity + 1}
+            ? {
+                ...item,
+                quantity:item.quantity + 1,
+                sum:item.sum + item.price
+            }
             : item
+        
         );
 
     }else{
-        return [...oldBasket,{...product,quantity: 1}];
+        return [...oldBasket,{
+            ...product,
+            quantity: 1,
+            sum:product.price
+
+        }];
     }
 });
 };
@@ -32,7 +42,11 @@ setbasket(oldBasket => {
         if (fintOldBasket){
             return oldBasket.map(item => 
                 item.id === product.id
-                ? {...item,quantity:item.quantity - 1}
+                ? {
+                    ...item,
+                    quantity:item.quantity - 1,
+                    sum:item.sum - item.price
+                }
                 : item
             ).filter(item => item.quantity>0);
     
@@ -50,7 +64,11 @@ setbasket(oldBasket => {
         if (fintOldBasket){
             return oldBasket.map(item => 
                 item.id === product.id
-                ? {...item,quantity:item.quantity + 1}
+                ? {
+                    ...item,
+                    quantity:item.quantity + 1,
+                    sum:item.sum + item.price
+                }
                 : item
             ).filter(item => item.quantity>0);
     

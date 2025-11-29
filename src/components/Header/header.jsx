@@ -10,21 +10,15 @@ import { useBasket } from '../basket/BasketContext'
 import { useEffect, useState } from "react";
 
 export default function Header() {
-    const { setbasket,totalItems, totalPrice, basket,minusBasket,plusBasket} = useBasket()
+    const { totalItems, totalPrice, basket,minusBasket,plusBasket} = useBasket()
     const [openBasket,setOpenBasket] = useState(false)
+
     useEffect(()=>{
+        if(basket.length === 0 && openBasket){
+           setOpenBasket(e => !e) 
+        }
 
-            if(openBasket && basket.length == 0){
-                setOpenBasket(!openBasket)
-            }
-            
-        
-    },[basket])
-    useEffect(()=>{
-      
-    },[])
-
-
+    },[basket,openBasket])
     const btnOpenModal =()=>{
         if(basket.length !== 0){
             setOpenBasket(!openBasket)
@@ -34,6 +28,7 @@ export default function Header() {
         }
 
     }
+    
 
 
     return (
@@ -95,22 +90,50 @@ export default function Header() {
                     </nav>
                 </div>
             </div>
-            <div className="basket-modal">
-                {openBasket && basket.map((e)=>
-                <div key={e.id} className="basket-modal-item">
-                    <img src={e.image} alt="" />
-                    <h1>{e.name}</h1>
-                    <div className="basket-modal-item_items">
-                        <p>{e.price} руб.</p>
-                        <p>{e.quantity} шт.</p>
+                {openBasket && (
+                    <div className="basket-modal">
+                        <div className={basket.length > 3 ? "basket-modal_scroll":''}>
+
+                            <div>
+                                <p className="basket_item">Товары в корзине:</p>
+                                <button className="close-btn" onClick={() => setOpenBasket(false)}>X</button>
+                            </div>      
+                            {basket.map((e) =>
+                                <div key={e.id} className="basket-modal-item">
+                                    <div className="basket-modal-item_img-title">
+                                        <img src={e.image} alt="" />
+                                        <h1>{e.name}</h1>
+                                    </div>
+                                    <div className="basket-modal-item_items">
+                                        <div className="basket-modal-item_items-quantity_sum">
+                                            <p>{e.quantity} шт. на <strong>{e.sum} руб.</strong></p>
+                                        </div>
+                                        <div className="basket-modal-item_items-btnplus_minus">
+                                            <button onClick={() => minusBasket(e)}>-</button>
+                                            <button onClick={() => plusBasket(e)}>+</button>
+                                            <div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            )}
+                        </div>
                         <div>
-                            <button onClick={()=> plusBasket(e)}>+</button>
-                            <button onClick={() => minusBasket(e)}>-</button>
+                            
+                            <div>
+                                <p className="basket-modal-item_items-btnplus_minus-sum-text">Всего: </p>
+                                <p className="basket-modal-item_items-btnplus_minus-sum"><strong>{totalItems}</strong> на <strong>{totalPrice}</strong> руб.</p>
+                            </div>
+                            <div>
+                                <button className="basket-modal-item_items-btnplus_minus-basket">Корзина</button>
+                                <button className="basket-modal-item_items-btnplus_minus-pay">Оформить заказ</button>
+                            </div>
+
                         </div>
                     </div>
-                </div>  
                 )}
-            </div>
+            
         </header>
     )
 }

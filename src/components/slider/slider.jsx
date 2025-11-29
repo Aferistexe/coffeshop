@@ -26,11 +26,12 @@ export default function Slider() {
     const interval = setInterval(()=>{
       setSlide(prev => (prev +1)%slides.length);
   
-    },6000)
+    },3000)
     return () => clearInterval(interval);
 
 
   },[slides.length]);
+  
 
   return (
     <section className='Slides'>
